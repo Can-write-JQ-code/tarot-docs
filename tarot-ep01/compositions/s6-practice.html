@@ -1,0 +1,519 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Noto Sans SC";
+      src: url("assets/fonts/NotoSansSC-VF.ttf") format("truetype");
+      font-weight: 100 900;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Noto Serif SC";
+      src: url("assets/fonts/NotoSerifSC-VF.ttf") format("truetype");
+      font-weight: 200 900;
+      font-style: normal;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: var(--font-body, "Noto Sans SC"), sans-serif;
+      color: var(--color-ink, #1f1916);
+      overflow: hidden;
+    }
+    .desk-bg {
+      position: absolute;
+      inset: 0;
+      background-color: var(--color-ground, #2b1e17);
+      background-image:
+        radial-gradient(ellipse 1100px 760px at 56% 42%, rgba(92, 62, 44, 0.44) 0%, rgba(43, 30, 23, 0) 72%),
+        repeating-linear-gradient(
+          90deg,
+          rgba(255, 244, 228, 0.016) 0px,
+          rgba(255, 244, 228, 0.016) 2px,
+          rgba(20, 12, 8, 0.024) 2px,
+          rgba(20, 12, 8, 0.024) 7px
+        );
+    }
+    .stage-layer {
+      position: absolute;
+      inset: 0;
+    }
+    .card-pedestal {
+      position: absolute;
+      left: 104px;
+      top: 56px;
+      width: 432px;
+      height: 828px;
+    }
+    .tarot-frame {
+      position: relative;
+      width: 432px;
+      height: 740px;
+      padding: 8px;
+      background: #f5efe2;
+      border-radius: 14px;
+      border: 2px solid #d7cab4;
+      box-shadow: 0 18px 36px rgba(10, 6, 4, 0.54), 0 3px 8px rgba(10, 6, 4, 0.32);
+    }
+    .tarot-art-box {
+      position: relative;
+      width: 412px;
+      height: 720px;
+      border-radius: 8px;
+      overflow: visible;
+    }
+    .tarot-art-box img {
+      width: 412px;
+      height: 720px;
+      object-fit: cover;
+      display: block;
+      border-radius: 8px;
+    }
+    .card-overlay-svg {
+      position: absolute;
+      inset: 0;
+      width: 412px;
+      height: 720px;
+      overflow: visible;
+      pointer-events: none;
+    }
+    .card-plaque {
+      margin-top: 14px;
+      width: 432px;
+      height: 72px;
+      padding: 0 22px;
+      border-radius: 12px;
+      background: #231711;
+      border: 2px solid #8a6a43;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #f8f2e7;
+      box-shadow: 0 8px 18px rgba(10, 6, 4, 0.35);
+    }
+    .card-plaque-name {
+      font-family: var(--font-display, "Noto Serif SC"), serif;
+      font-size: 31px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #fbf5ea;
+    }
+    .card-plaque-tag {
+      font-size: 28px;
+      font-weight: 700;
+      color: #f3c878;
+    }
+    .work-area {
+      position: absolute;
+      left: 576px;
+      top: 56px;
+      width: 1240px;
+      height: 828px;
+    }
+    .question-card {
+      position: relative;
+      width: 1240px;
+      height: 128px;
+      padding: 14px 28px;
+      border-radius: 14px;
+      background: var(--color-paper, #f6f1e7);
+      border: 2px solid #d5c7b2;
+      box-shadow: 0 12px 26px rgba(12, 7, 4, 0.34);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .q-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .sim-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 14px;
+      border-radius: 8px;
+      background: #f2dfd9;
+      border: 1.5px solid #c97f6d;
+      color: #8f2311;
+      font-size: 29px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    .ep-tag {
+      font-size: 28px;
+      font-weight: 600;
+      color: #4a3e37;
+    }
+    .question-headline {
+      font-family: var(--font-display, "Noto Serif SC"), serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: #1f1916;
+      line-height: 1.28;
+      letter-spacing: -0.01em;
+    }
+    .worksheet {
+      position: absolute;
+      left: 0;
+      top: 142px;
+      width: 1240px;
+      height: 534px;
+      padding: 14px 24px 14px 58px;
+      border-radius: 14px;
+      background: var(--color-paper, #f6f1e7);
+      border: 2px solid #d5c7b2;
+      box-shadow: 0 14px 30px rgba(12, 7, 4, 0.38);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .binder-rail {
+      position: absolute;
+      left: 16px;
+      top: 26px;
+      bottom: 26px;
+      width: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .binder-hole {
+      width: 18px;
+      height: 18px;
+      border-radius: 9px;
+      background: #2b1e17;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.65);
+    }
+    .ws-row {
+      position: relative;
+      width: 100%;
+      height: 118px;
+      border-radius: 10px;
+      background: #efe7d8;
+      border: 2px solid #d6c8b2;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+    }
+    .ws-row-active {
+      background: #fffaf0;
+      border: 3px solid var(--color-accent, #a62b17);
+      box-shadow: 0 6px 16px rgba(166, 43, 23, 0.14);
+    }
+    .ws-row-done {
+      background: #f8f4ec;
+      border: 2px solid #bfb09a;
+    }
+    .ws-label-col {
+      width: 148px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-right: 2px solid #d5c7b2;
+      padding-right: 14px;
+      margin-right: 20px;
+    }
+    .ws-step-num {
+      font-size: 28px;
+      font-weight: 700;
+      color: #8f2311;
+    }
+    .ws-step-name {
+      font-family: var(--font-display, "Noto Serif SC"), serif;
+      font-size: 33px;
+      font-weight: 700;
+      color: #1f1916;
+    }
+    .ws-content-col {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-width: 0;
+    }
+    .ws-text-main {
+      font-size: 30px;
+      font-weight: 600;
+      color: #1f1916;
+      line-height: 1.34;
+    }
+    .ws-text-placeholder {
+      font-size: 29px;
+      font-weight: 500;
+      color: #54463e;
+    }
+    .status-pill {
+      flex-shrink: 0;
+      padding: 5px 14px;
+      border-radius: 8px;
+      font-size: 29px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .pill-active {
+      background: #a62b17;
+      color: #fff9f5;
+    }
+    .pill-wait {
+      background: #dfd5c5;
+      color: #4a3e37;
+    }
+    .pill-fit {
+      background: #18523f;
+      color: #f4fbf8;
+    }
+    .pill-hold {
+      background: #dce0e3;
+      color: #2f373d;
+    }
+    .desk-tray {
+      position: absolute;
+      left: 0;
+      top: 690px;
+      width: 1240px;
+      height: 138px;
+      border-radius: 14px;
+      background: #221711;
+      border: 2px solid #6e5338;
+      padding: 16px 26px;
+      color: #f8f2e7;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: 0 10px 24px rgba(10, 6, 4, 0.42);
+    }
+    .tray-top-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .tray-title {
+      font-size: 30px;
+      font-weight: 700;
+      color: #fbf4e8;
+      line-height: 1.3;
+    }
+    .tray-sub {
+      font-size: 28px;
+      font-weight: 600;
+      color: #f3c878;
+      line-height: 1.3;
+    }
+    .progress-track {
+      margin-top: 14px;
+      width: 100%;
+      height: 12px;
+      border-radius: 6px;
+      background: rgba(248, 242, 231, 0.16);
+      overflow: hidden;
+    }
+    .progress-fill {
+      width: 100%;
+      height: 100%;
+      border-radius: 6px;
+      background: #e5a94c;
+      transform-origin: left center;
+    }
+    .slot-wrap {
+      position: relative;
+      flex: 1;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+    .blank-prompt {
+      font-size: 29px;
+      font-weight: 600;
+      color: #5c4b41;
+    }
+    .ref-answer {
+      position: absolute;
+      left: 0;
+      right: 0;
+      font-size: 30px;
+      font-weight: 700;
+      color: #1f1916;
+      line-height: 1.3;
+    }
+    .end-footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .next-ep-badge {
+      padding: 6px 16px;
+      border-radius: 8px;
+      background: #e5a94c;
+      color: #1f1610;
+      font-size: 28px;
+      font-weight: 800;
+    }
+    .credit-line {
+      margin-top: 10px;
+      font-size: 28px;
+      font-weight: 500;
+      color: #d7c8b4;
+    }
+  </style>
+  <div id="root" data-composition-id="s6-practice" data-width="1920" data-height="1080">
+    <div id="s6-bg" class="desk-bg"></div>
+    <div id="s6-stage" class="clip stage-layer" data-start="0" data-duration="56" data-track-index="1" data-hold>
+      <div class="card-pedestal">
+        <div class="tarot-frame">
+          <div class="tarot-art-box">
+            <img src="assets/cards/swords02.png" alt="宝剑二正位" />
+          </div>
+        </div>
+        <div class="card-plaque">
+          <span class="card-plaque-name" data-var-text="card-label">宝剑二 · 正位</span>
+          <span id="s6-plaque-tag" class="card-plaque-tag">独立跟练</span>
+        </div>
+      </div>
+
+      <div class="work-area">
+        <div class="question-card">
+          <div class="q-meta-row">
+            <span id="s6-mode-badge" class="sim-badge">暂停跟练 · 清空重走一遍</span>
+            <span class="ep-tag">可换自选题：<span data-var-text="alt-question">今晚整理书桌，我从哪里开始？</span></span>
+          </div>
+          <div class="question-headline" data-var-text="question-text">今天我可以做哪一步，让小组作业往前走？</div>
+        </div>
+
+        <div class="worksheet">
+        <div class="binder-rail" data-layout-ignore>
+          <div class="binder-hole"></div>
+          <div class="binder-hole"></div>
+          <div class="binder-hole"></div>
+          <div class="binder-hole"></div>
+          <div class="binder-hole"></div>
+        </div>
+          <div id="s6-r1" class="ws-row ws-row-active">
+            <div class="ws-label-col">
+              <span class="ws-step-num">1</span>
+              <span class="ws-step-name">看见</span>
+            </div>
+            <div class="ws-content-col">
+              <div class="slot-wrap">
+                <span id="s6-b1" class="blank-prompt">说出图上两处能直接指给别人看的细节……</span>
+                <span id="s6-a1" class="ref-answer">眼睛被布蒙住，双手各握一把剑</span>
+              </div>
+              <span id="s6-p1" class="status-pill pill-wait">请作答</span>
+            </div>
+          </div>
+
+          <div id="s6-r2" class="ws-row ws-row-active">
+            <div class="ws-label-col">
+              <span class="ws-step-num">2</span>
+              <span class="ws-step-name">可能</span>
+            </div>
+            <div class="ws-content-col">
+              <div class="slot-wrap">
+                <span id="s6-b2" class="blank-prompt">写出两种可能的联想（想不到也可写“暂时没有”）……</span>
+                <span id="s6-a2" class="ref-answer">事情同时压在手上 ／ 还在等信息</span>
+              </div>
+              <span id="s6-p2" class="status-pill pill-wait">请作答</span>
+            </div>
+          </div>
+
+          <div id="s6-r3" class="ws-row ws-row-active">
+            <div class="ws-label-col">
+              <span class="ws-step-num">3</span>
+              <span class="ws-step-name">核对</span>
+            </div>
+            <div class="ws-content-col">
+              <div class="slot-wrap">
+                <span id="s6-b3" class="blank-prompt">指出去哪里核对哪条现实信息……</span>
+                <span id="s6-a3" class="ref-answer">小组群里分工已确认，提交格式还没定</span>
+              </div>
+              <span id="s6-p3" class="status-pill pill-wait">请作答</span>
+            </div>
+          </div>
+
+          <div id="s6-r4" class="ws-row ws-row-active">
+            <div class="ws-label-col">
+              <span class="ws-step-num">4</span>
+              <span class="ws-step-name">行动</span>
+            </div>
+            <div class="ws-content-col">
+              <div class="slot-wrap">
+                <span id="s6-b4" class="blank-prompt">定一个今天就能开始的具体小动作……</span>
+                <span id="s6-a4" class="ref-answer">晚饭前在小组群发消息问清提交格式</span>
+              </div>
+              <span id="s6-p4" class="status-pill pill-wait">请作答</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="desk-tray">
+          <div id="s6-practice-tray">
+            <div class="tray-top-line">
+              <span id="s6-practice-title" class="tray-title">轮到你看着宝剑二走一遍（需要更多时间请随时暂停视频）</span>
+              <span class="tray-sub">独立跟练 · 可暂停</span>
+            </div>
+            <div class="progress-track">
+              <div id="s6-twenty-bar" class="progress-fill"></div>
+            </div>
+          </div>
+
+          <div id="s6-review-tray" style="position: absolute; left: 26px; right: 26px; top: 18px;">
+            <div class="end-footer-row">
+              <span id="s6-review-headline" class="tray-title">自查：图上指得出 · 信息能支持 · 今天能开始</span>
+              <span id="s6-next-badge" class="next-ep-badge">下集 EP02 · 问出可行动的问题</span>
+            </div>
+            <div id="s6-credit" class="credit-line">
+              牌图：Pamela Colman Smith (1910 RWS, Wikimedia Commons)
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    gsap.set(["#s6-a1", "#s6-a2", "#s6-a3", "#s6-a4"], { opacity: 0, y: 8 });
+    gsap.set("#s6-review-tray", { opacity: 0, y: 10 });
+    gsap.set("#s6-next-badge", { opacity: 0, scale: 0.92 });
+    gsap.set("#s6-twenty-bar", { scaleX: 0 });
+
+    // 8.0s crisp solo practice countdown right after v06_0 finishes: local 14.80s -> 22.80s (abs 205.30s -> 213.30s)
+    tl.fromTo("#s6-twenty-bar", { scaleX: 0 }, { scaleX: 1, duration: 8.0, ease: "none" }, 14.8);
+
+    // Reveal complete reference record right as v06_1 starts (local 23.30s = abs 213.80s)
+    tl.to(["#s6-b1", "#s6-b2", "#s6-b3", "#s6-b4", "#s6-practice-tray"], {
+      opacity: 0,
+      duration: 0.22,
+      ease: "power2.in",
+    }, 23.1);
+
+    tl.set("#s6-mode-badge", { textContent: "参考记录 · 模拟案例对照" }, 23.35);
+    tl.set("#s6-plaque-tag", { textContent: "对照复盘" }, 23.35);
+
+    tl.fromTo("#s6-a1", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.26, ease: "power3.out" }, 23.4);
+    tl.fromTo("#s6-a2", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.26, ease: "power3.out" }, 23.58);
+    tl.fromTo("#s6-a3", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.26, ease: "power3.out" }, 23.76);
+    tl.fromTo("#s6-a4", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.26, ease: "power3.out" }, 23.94);
+    tl.fromTo("#s6-review-tray", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 24.1);
+
+    // Three self-check ticks synced to exact v06_1 question endings (starts local 23.20s = abs 213.70s)
+    tl.set("#s6-p1", { textContent: "图上可指 ✓", backgroundColor: "#18523f", color: "#f4fbf8" }, 33.35);
+    tl.set("#s6-p2", { textContent: "有据保留 ✓", backgroundColor: "#18523f", color: "#f4fbf8" }, 36.62);
+    tl.set("#s6-p3", { textContent: "已查消息 ✓", backgroundColor: "#18523f", color: "#f4fbf8" }, 36.62);
+    tl.set("#s6-p4", { textContent: "今日可做 ✓", backgroundColor: "#18523f", color: "#f4fbf8" }, 40.10);
+
+    // "暂时没有" note & EP02 handoff synced to v06_2 (starts local 40.90s = abs 231.40s)
+    tl.set("#s6-review-headline", { textContent: "想不到联想可如实写“暂时没有”" }, 44.8);
+    tl.fromTo("#s6-next-badge", { opacity: 0, scale: 0.92 }, { opacity: 1, scale: 1, duration: 0.32, ease: "back.out(1.4)" }, 46.72);
+
+    window.__timelines["s6-practice"] = tl;
+  </script>
+</template>

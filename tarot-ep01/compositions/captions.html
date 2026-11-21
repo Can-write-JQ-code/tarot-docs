@@ -1,0 +1,149 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Noto Sans SC";
+      src: url("assets/fonts/NotoSansSC-VF.ttf") format("truetype");
+      font-weight: 100 900;
+      font-style: normal;
+    }
+    #root { position: absolute; inset: 0; pointer-events: none; }
+    .cap-slot { position: absolute; left: 0; right: 0; top: 940px; text-align: center; overflow: visible; pointer-events: none; }
+    .cap-pill {
+      display: inline-block; max-width: 1580px; padding: 10px 26px; border-radius: 12px;
+      background: rgba(24, 16, 12, 0.92); border: 1.5px solid rgba(218, 200, 174, 0.34);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.36); color: #fbf7f0;
+      font-family: "Noto Sans SC", sans-serif; font-size: 32px; font-weight: 700; line-height: 1.32; letter-spacing: 0.01em;
+    }
+    .cap-pill-pause { background: rgba(31, 74, 58, 0.94); border-color: rgba(188, 228, 210, 0.48); color: #f4fbf8; }
+  </style>
+  <div id="root" data-composition-id="ep01-captions" data-width="1920" data-height="1080">
+    <div id="cap-01" class="clip cap-slot" data-start="0.57" data-duration="1.60" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-01" class="cap-pill">欢迎来到第一集</div></div>
+    <div id="cap-02" class="clip cap-slot" data-start="2.51" data-duration="2.84" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-02" class="cap-pill">今天我们只用这一张正位的宝剑二</div></div>
+    <div id="cap-03" class="clip cap-slot" data-start="5.49" data-duration="2.34" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-03" class="cap-pill">带你完整走一遍单张读牌</div></div>
+    <div id="cap-04" class="clip cap-slot" data-start="8.22" data-duration="1.92" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-04" class="cap-pill">先设想一个日常情境</div></div>
+    <div id="cap-05" class="clip cap-slot" data-start="10.29" data-duration="3.26" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-05" class="cap-pill">你正在做一份小组作业，大家还没交齐</div></div>
+    <div id="cap-06" class="clip cap-slot" data-start="13.59" data-duration="2.90" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-06" class="cap-pill">你想知道：今天我可以先做哪一步</div></div>
+    <div id="cap-07" class="clip cap-slot" data-start="16.54" data-duration="1.51" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-07" class="cap-pill">让作业往前推进？</div></div>
+    <div id="cap-08" class="clip cap-slot" data-start="18.47" data-duration="4.63" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-08" class="cap-pill">右边的表格分成“看见、可能、核对、行动”四栏</div></div>
+    <div id="cap-09" class="clip cap-slot" data-start="23.43" data-duration="3.60" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-09" class="cap-pill">我们先点亮第一栏“看见”，从牌面本身看起</div></div>
+    <div id="cap-10" class="clip cap-slot" data-start="28.47" data-duration="2.56" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-10" class="cap-pill">第一步只记客观看到的画面</div></div>
+    <div id="cap-11" class="clip cap-slot" data-start="31.38" data-duration="2.03" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-11" class="cap-pill">请先观察左边这张牌</div></div>
+    <div id="cap-12" class="clip cap-slot" data-start="33.45" data-duration="3.82" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-12" class="cap-pill">试着找出两处你能直接在图上指出来的细节</div></div>
+    <div id="cap-13" class="clip cap-slot" data-start="37.55" data-duration="4.90" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-13" class="cap-pill cap-pill-pause">【看图 5 秒 · 可暂停】找两处能直接在图上指出来的细节</div></div>
+    <div id="cap-14" class="clip cap-slot" data-start="42.87" data-duration="2.17" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-14" class="cap-pill">好，我们对照画面来看</div></div>
+    <div id="cap-15" class="clip cap-slot" data-start="45.39" data-duration="3.68" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-15" class="cap-pill">第一处：一个人端坐着，眼睛被白布蒙住</div></div>
+    <div id="cap-16" class="clip cap-slot" data-start="49.42" data-duration="4.64" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-16" class="cap-pill">第二处：她双臂在胸前交叉，两只手各握着一把剑</div></div>
+    <div id="cap-17" class="clip cap-slot" data-start="54.41" data-duration="4.00" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-17" class="cap-pill">我们先把这两句能直接指出来的事实写进“看见”栏</div></div>
+    <div id="cap-18" class="clip cap-slot" data-start="58.87" data-duration="5.39" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-18" class="cap-pill">注意区分：有人看到蒙眼，就直接说“她害怕做决定”</div></div>
+    <div id="cap-19" class="clip cap-slot" data-start="64.59" data-duration="3.30" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-19" class="cap-pill">但图上真正看得见的只是那条蒙眼布</div></div>
+    <div id="cap-20" class="clip cap-slot" data-start="67.97" data-duration="4.17" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-20" class="cap-pill">至于害不害怕属于推测，要留到下一步再去想</div></div>
+    <div id="cap-21" class="clip cap-slot" data-start="72.97" data-duration="4.97" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-21" class="cap-pill">接着进入第二步“可能”，顺着刚才的细节往现实联想</div></div>
+    <div id="cap-22" class="clip cap-slot" data-start="78.28" data-duration="3.54" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-22" class="cap-pill">看到她两手各握一把剑，我想到第一种可能：</div></div>
+    <div id="cap-23" class="clip cap-slot" data-start="81.95" data-duration="4.27" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-23" class="cap-pill">是不是手头两件事同时压在一起，哪件都顾不过来？</div></div>
+    <div id="cap-24" class="clip cap-slot" data-start="86.67" data-duration="3.68" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-24" class="cap-pill">再看她蒙住眼睛的布，也可以想到第二种可能：</div></div>
+    <div id="cap-25" class="clip cap-slot" data-start="90.44" data-duration="4.53" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-25" class="cap-pill">是不是还缺一条关键消息，只能先停下来等一等？</div></div>
+    <div id="cap-26" class="clip cap-slot" data-start="95.42" data-duration="4.14" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-26" class="cap-pill">用第一人称记下来，就是 A“可能同时顾两件事”</div></div>
+    <div id="cap-27" class="clip cap-slot" data-start="99.64" data-duration="2.31" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-27" class="cap-pill">或者 B“可能在等一条消息”</div></div>
+    <div id="cap-28" class="clip cap-slot" data-start="102.30" data-duration="5.10" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-28" class="cap-pill">在核实之前，这两种可能我们先都留着，先对照看一眼</div></div>
+    <div id="cap-29" class="clip cap-slot" data-start="107.65" data-duration="4.40" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-29" class="cap-pill cap-pill-pause">【对照 4.5 秒】看看 A、B 两种可能各自对应的牌面线索</div></div>
+    <div id="cap-30" class="clip cap-slot" data-start="112.97" data-duration="3.55" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-30" class="cap-pill">那这两种说法，哪一种更符合实际情况呢？</div></div>
+    <div id="cap-31" class="clip cap-slot" data-start="116.85" data-duration="3.01" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-31" class="cap-pill">如果这是你的小组，你会先去查哪里？</div></div>
+    <div id="cap-32" class="clip cap-slot" data-start="120.15" data-duration="4.90" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-32" class="cap-pill cap-pill-pause">【思考 5 秒 · 可暂停】如果这是你的小组，你会先查哪条消息？</div></div>
+    <div id="cap-33" class="clip cap-slot" data-start="125.47" data-duration="3.01" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-33" class="cap-pill">最直接的办法，就是翻一下小组群</div></div>
+    <div id="cap-34" class="clip cap-slot" data-start="128.55" data-duration="2.53" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-34" class="cap-pill">看看究竟还有哪件事没定下来</div></div>
+    <div id="cap-35" class="clip cap-slot" data-start="131.47" data-duration="1.93" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-35" class="cap-pill">你看群里这条模拟记录：</div></div>
+    <div id="cap-36" class="clip cap-slot" data-start="133.54" data-duration="2.15" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-36" class="cap-pill">第一条写着“分工已经确认”</div></div>
+    <div id="cap-37" class="clip cap-slot" data-start="135.73" data-duration="3.35" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-37" class="cap-pill">第二条写着“提交格式还在等老师答复”</div></div>
+    <div id="cap-38" class="clip cap-slot" data-start="139.47" data-duration="5.95" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-38" class="cap-pill">这条记录支持了 B“还在等消息”，所以给 B 标上“目前较贴合”</div></div>
+    <div id="cap-39" class="clip cap-slot" data-start="145.75" data-duration="5.80" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-39" class="cap-pill">至于 A“两件事顾不过来”，单凭这条消息看不出来，标上“暂缺依据”</div></div>
+    <div id="cap-40" class="clip cap-slot" data-start="151.59" data-duration="4.01" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-40" class="cap-pill">先保留这个可能，但不把它当成已经查实的结论</div></div>
+    <div id="cap-41" class="clip cap-slot" data-start="156.47" data-duration="3.51" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-41" class="cap-pill">核对清楚以后，第四步“行动”就很好定了</div></div>
+    <div id="cap-42" class="clip cap-slot" data-start="160.31" data-duration="4.42" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-42" class="cap-pill">我选的具体动作是：晚饭前在小组群里发一条消息</div></div>
+    <div id="cap-43" class="clip cap-slot" data-start="164.77" data-duration="3.51" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-43" class="cap-pill">问清楚这次交 PDF 还是可编辑文档</div></div>
+    <div id="cap-44" class="clip cap-slot" data-start="168.72" data-duration="4.47" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-44" class="cap-pill">对比一下：如果只写“让作业别卡住”，听起来太笼统</div></div>
+    <div id="cap-45" class="clip cap-slot" data-start="173.33" data-duration="3.38" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-45" class="cap-pill">换成“晚饭前在小组群问清提交格式”</div></div>
+    <div id="cap-46" class="clip cap-slot" data-start="176.75" data-duration="3.86" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-46" class="cap-pill">什么时间、在哪里、做什么就一清二楚了</div></div>
+    <div id="cap-47" class="clip cap-slot" data-start="181.07" data-duration="5.00" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-47" class="cap-pill">要是打开群发现老师已经补发了模板，那行动也很明确：</div></div>
+    <div id="cap-48" class="clip cap-slot" data-start="186.12" data-duration="3.73" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-48" class="cap-pill">直接打开模板，先核对自己负责的那一段</div></div>
+    <div id="cap-49" class="clip cap-slot" data-start="190.97" data-duration="5.37" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-49" class="cap-pill">现在把右边四栏清空，轮到你看着宝剑二自己走一遍</div></div>
+    <div id="cap-50" class="clip cap-slot" data-start="196.67" data-duration="5.45" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-50" class="cap-pill">也可以换成自己的事，比如“今晚整理书桌，我从哪里开始？”</div></div>
+    <div id="cap-51" class="clip cap-slot" data-start="202.47" data-duration="2.59" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-51" class="cap-pill">需要更多时间可以随时暂停</div></div>
+    <div id="cap-52" class="clip cap-slot" data-start="205.35" data-duration="7.90" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-52" class="cap-pill cap-pill-pause">【跟练 8 秒 · 可随时暂停】试着依次说出：看见 · 可能 · 核对 · 行动</div></div>
+    <div id="cap-53" class="clip cap-slot" data-start="213.77" data-duration="6.36" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-53" class="cap-pill">好，屏幕上是完整参考记录，你可以对照做三项自查：</div></div>
+    <div id="cap-54" class="clip cap-slot" data-start="220.22" data-duration="4.05" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-54" class="cap-pill">第一，你说的两处细节能在图上直接指出来吗？</div></div>
+    <div id="cap-55" class="clip cap-slot" data-start="224.60" data-duration="2.96" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-55" class="cap-pill">第二，你的联想有现实信息支持吗？</div></div>
+    <div id="cap-56" class="clip cap-slot" data-start="227.89" data-duration="3.14" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-56" class="cap-pill">第三，选定的行动今天就能开始吗？</div></div>
+    <div id="cap-57" class="clip cap-slot" data-start="231.47" data-duration="5.38" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-57" class="cap-pill">如果一时还想不到贴合的联想，如实写上“暂时没有”也完全可以</div></div>
+    <div id="cap-58" class="clip cap-slot" data-start="237.19" data-duration="6.59" data-track-index="1" data-layout-allow-caption-zone><div id="cap-pill-58" class="cap-pill">下一集我们接着练：怎样在抽牌前，先问出一个自己能行动的问题</div></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    const cues = [
+      ["#cap-pill-01", 0.57, 2.17],
+      ["#cap-pill-02", 2.51, 5.35],
+      ["#cap-pill-03", 5.49, 7.83],
+      ["#cap-pill-04", 8.22, 10.14],
+      ["#cap-pill-05", 10.29, 13.55],
+      ["#cap-pill-06", 13.59, 16.49],
+      ["#cap-pill-07", 16.54, 18.05],
+      ["#cap-pill-08", 18.47, 23.10],
+      ["#cap-pill-09", 23.43, 27.03],
+      ["#cap-pill-10", 28.47, 31.03],
+      ["#cap-pill-11", 31.38, 33.41],
+      ["#cap-pill-12", 33.45, 37.27],
+      ["#cap-pill-13", 37.55, 42.45],
+      ["#cap-pill-14", 42.87, 45.04],
+      ["#cap-pill-15", 45.39, 49.07],
+      ["#cap-pill-16", 49.42, 54.06],
+      ["#cap-pill-17", 54.41, 58.41],
+      ["#cap-pill-18", 58.87, 64.26],
+      ["#cap-pill-19", 64.59, 67.89],
+      ["#cap-pill-20", 67.97, 72.14],
+      ["#cap-pill-21", 72.97, 77.94],
+      ["#cap-pill-22", 78.28, 81.82],
+      ["#cap-pill-23", 81.95, 86.22],
+      ["#cap-pill-24", 86.67, 90.35],
+      ["#cap-pill-25", 90.44, 94.97],
+      ["#cap-pill-26", 95.42, 99.56],
+      ["#cap-pill-27", 99.64, 101.95],
+      ["#cap-pill-28", 102.30, 107.40],
+      ["#cap-pill-29", 107.65, 112.05],
+      ["#cap-pill-30", 112.97, 116.52],
+      ["#cap-pill-31", 116.85, 119.86],
+      ["#cap-pill-32", 120.15, 125.05],
+      ["#cap-pill-33", 125.47, 128.48],
+      ["#cap-pill-34", 128.55, 131.08],
+      ["#cap-pill-35", 131.47, 133.40],
+      ["#cap-pill-36", 133.54, 135.69],
+      ["#cap-pill-37", 135.73, 139.08],
+      ["#cap-pill-38", 139.47, 145.42],
+      ["#cap-pill-39", 145.75, 151.55],
+      ["#cap-pill-40", 151.59, 155.60],
+      ["#cap-pill-41", 156.47, 159.98],
+      ["#cap-pill-42", 160.31, 164.73],
+      ["#cap-pill-43", 164.77, 168.28],
+      ["#cap-pill-44", 168.72, 173.19],
+      ["#cap-pill-45", 173.33, 176.71],
+      ["#cap-pill-46", 176.75, 180.61],
+      ["#cap-pill-47", 181.07, 186.07],
+      ["#cap-pill-48", 186.12, 189.85],
+      ["#cap-pill-49", 190.97, 196.34],
+      ["#cap-pill-50", 196.67, 202.12],
+      ["#cap-pill-51", 202.47, 205.06],
+      ["#cap-pill-52", 205.35, 213.25],
+      ["#cap-pill-53", 213.77, 220.13],
+      ["#cap-pill-54", 220.22, 224.27],
+      ["#cap-pill-55", 224.60, 227.56],
+      ["#cap-pill-56", 227.89, 231.03],
+      ["#cap-pill-57", 231.47, 236.85],
+      ["#cap-pill-58", 237.19, 243.78]
+    ];
+    for (const [sel, s, e] of cues) {
+      gsap.set(sel, { opacity: 0, y: 5 });
+      tl.fromTo(sel, { opacity: 0, y: 5 }, { opacity: 1, y: 0, duration: 0.12, ease: "power3.out" }, s);
+      tl.to(sel, { opacity: 0, duration: 0.09, ease: "power2.in" }, Math.max(s + 0.12, e - 0.10));
+      tl.set(sel, { opacity: 0, visibility: "hidden" }, e);
+    }
+    window.__timelines["ep01-captions"] = tl;
+  </script>
+</template>

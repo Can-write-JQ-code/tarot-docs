@@ -1,0 +1,455 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Noto Sans SC";
+      src: url("assets/fonts/NotoSansSC-VF.ttf") format("truetype");
+      font-weight: 100 900;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Noto Serif SC";
+      src: url("assets/fonts/NotoSerifSC-VF.ttf") format("truetype");
+      font-weight: 200 900;
+      font-style: normal;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: var(--font-body, "Noto Sans SC"), sans-serif;
+      color: var(--color-ink, #1f1916);
+      overflow: hidden;
+    }
+    .desk-bg {
+      position: absolute;
+      inset: 0;
+      background-color: var(--color-ground, #2b1e17);
+      background-image:
+        radial-gradient(ellipse 1100px 760px at 56% 42%, rgba(92, 62, 44, 0.44) 0%, rgba(43, 30, 23, 0) 72%),
+        repeating-linear-gradient(
+          90deg,
+          rgba(255, 244, 228, 0.016) 0px,
+          rgba(255, 244, 228, 0.016) 2px,
+          rgba(20, 12, 8, 0.024) 2px,
+          rgba(20, 12, 8, 0.024) 7px
+        );
+    }
+    .stage-layer {
+      position: absolute;
+      inset: 0;
+    }
+    .card-pedestal {
+      position: absolute;
+      left: 104px;
+      top: 56px;
+      width: 432px;
+      height: 828px;
+    }
+    .tarot-frame {
+      position: relative;
+      width: 432px;
+      height: 740px;
+      padding: 8px;
+      background: #f5efe2;
+      border-radius: 14px;
+      border: 2px solid #d7cab4;
+      box-shadow: 0 18px 36px rgba(10, 6, 4, 0.54), 0 3px 8px rgba(10, 6, 4, 0.32);
+    }
+    .tarot-art-box {
+      position: relative;
+      width: 412px;
+      height: 720px;
+      border-radius: 8px;
+      overflow: visible;
+    }
+    .tarot-art-box img {
+      width: 412px;
+      height: 720px;
+      object-fit: cover;
+      display: block;
+      border-radius: 8px;
+    }
+    .card-overlay-svg {
+      position: absolute;
+      inset: 0;
+      width: 412px;
+      height: 720px;
+      overflow: visible;
+      pointer-events: none;
+    }
+    .card-plaque {
+      margin-top: 14px;
+      width: 432px;
+      height: 72px;
+      padding: 0 22px;
+      border-radius: 12px;
+      background: #231711;
+      border: 2px solid #8a6a43;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #f8f2e7;
+      box-shadow: 0 8px 18px rgba(10, 6, 4, 0.35);
+    }
+    .card-plaque-name {
+      font-family: var(--font-display, "Noto Serif SC"), serif;
+      font-size: 31px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #fbf5ea;
+    }
+    .card-plaque-tag {
+      font-size: 28px;
+      font-weight: 700;
+      color: #f3c878;
+    }
+    .work-area {
+      position: absolute;
+      left: 576px;
+      top: 56px;
+      width: 1240px;
+      height: 828px;
+    }
+    .question-card {
+      position: relative;
+      width: 1240px;
+      height: 128px;
+      padding: 14px 28px;
+      border-radius: 14px;
+      background: var(--color-paper, #f6f1e7);
+      border: 2px solid #d5c7b2;
+      box-shadow: 0 12px 26px rgba(12, 7, 4, 0.34);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .q-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .sim-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 14px;
+      border-radius: 8px;
+      background: #f2dfd9;
+      border: 1.5px solid #c97f6d;
+      color: #8f2311;
+      font-size: 29px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    .ep-tag {
+      font-size: 28px;
+      font-weight: 600;
+      color: #4a3e37;
+    }
+    .question-headline {
+      font-family: var(--font-display, "Noto Serif SC"), serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: #1f1916;
+      line-height: 1.28;
+      letter-spacing: -0.01em;
+    }
+    .worksheet {
+      position: absolute;
+      left: 0;
+      top: 142px;
+      width: 1240px;
+      height: 534px;
+      padding: 14px 24px 14px 58px;
+      border-radius: 14px;
+      background: var(--color-paper, #f6f1e7);
+      border: 2px solid #d5c7b2;
+      box-shadow: 0 14px 30px rgba(12, 7, 4, 0.38);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .binder-rail {
+      position: absolute;
+      left: 16px;
+      top: 26px;
+      bottom: 26px;
+      width: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .binder-hole {
+      width: 18px;
+      height: 18px;
+      border-radius: 9px;
+      background: #2b1e17;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.65);
+    }
+    .ws-row {
+      position: relative;
+      width: 100%;
+      height: 118px;
+      border-radius: 10px;
+      background: #efe7d8;
+      border: 2px solid #d6c8b2;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+    }
+    .ws-row-active {
+      background: #fffaf0;
+      border: 3px solid var(--color-accent, #a62b17);
+      box-shadow: 0 6px 16px rgba(166, 43, 23, 0.14);
+    }
+    .ws-row-done {
+      background: #f8f4ec;
+      border: 2px solid #bfb09a;
+    }
+    .ws-label-col {
+      width: 148px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-right: 2px solid #d5c7b2;
+      padding-right: 14px;
+      margin-right: 20px;
+    }
+    .ws-step-num {
+      font-size: 28px;
+      font-weight: 700;
+      color: #8f2311;
+    }
+    .ws-step-name {
+      font-family: var(--font-display, "Noto Serif SC"), serif;
+      font-size: 33px;
+      font-weight: 700;
+      color: #1f1916;
+    }
+    .ws-content-col {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-width: 0;
+    }
+    .ws-text-main {
+      font-size: 30px;
+      font-weight: 600;
+      color: #1f1916;
+      line-height: 1.34;
+    }
+    .ws-text-placeholder {
+      font-size: 29px;
+      font-weight: 500;
+      color: #54463e;
+    }
+    .status-pill {
+      flex-shrink: 0;
+      padding: 5px 14px;
+      border-radius: 8px;
+      font-size: 29px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .pill-active {
+      background: #a62b17;
+      color: #fff9f5;
+    }
+    .pill-wait {
+      background: #dfd5c5;
+      color: #4a3e37;
+    }
+    .pill-fit {
+      background: #18523f;
+      color: #f4fbf8;
+    }
+    .pill-hold {
+      background: #dce0e3;
+      color: #2f373d;
+    }
+    .desk-tray {
+      position: absolute;
+      left: 0;
+      top: 690px;
+      width: 1240px;
+      height: 138px;
+      border-radius: 14px;
+      background: #221711;
+      border: 2px solid #6e5338;
+      padding: 16px 26px;
+      color: #f8f2e7;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: 0 10px 24px rgba(10, 6, 4, 0.42);
+    }
+    .tray-top-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .tray-title {
+      font-size: 30px;
+      font-weight: 700;
+      color: #fbf4e8;
+      line-height: 1.3;
+    }
+    .tray-sub {
+      font-size: 28px;
+      font-weight: 600;
+      color: #f3c878;
+      line-height: 1.3;
+    }
+    .progress-track {
+      margin-top: 14px;
+      width: 100%;
+      height: 12px;
+      border-radius: 6px;
+      background: rgba(248, 242, 231, 0.16);
+      overflow: hidden;
+    }
+    .progress-fill {
+      width: 100%;
+      height: 100%;
+      border-radius: 6px;
+      background: #e5a94c;
+      transform-origin: left center;
+    }
+    .plaque-highlight {
+      position: absolute;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      height: 80px;
+      border-radius: 14px;
+      border: 3px solid #f3c878;
+      pointer-events: none;
+    }
+    .q-underline {
+      height: 4px;
+      width: 460px;
+      background: var(--color-accent, #a62b17);
+      border-radius: 2px;
+      transform-origin: left center;
+      margin-top: 4px;
+    }
+  </style>
+  <div id="root" data-composition-id="s1-intro" data-width="1920" data-height="1080">
+    <div id="s1-bg" class="desk-bg"></div>
+    <div id="s1-stage" class="clip stage-layer" data-start="0" data-duration="28" data-track-index="1" data-hold>
+      <div id="s1-card-pedestal" class="card-pedestal">
+        <div id="s1-card-frame" class="tarot-frame">
+          <div class="tarot-art-box">
+            <img id="s1-card-img" src="assets/cards/swords02.png" alt="宝剑二正位" />
+          </div>
+        </div>
+        <div id="s1-plaque" class="card-plaque">
+          <span class="card-plaque-name" data-var-text="card-label">宝剑二 · 正位</span>
+          <span class="card-plaque-tag">RWS II</span>
+        </div>
+        <div id="s1-plaque-ring" class="plaque-highlight"></div>
+      </div>
+
+      <div id="s1-work" class="work-area">
+        <div id="s1-q-card" class="question-card">
+          <div class="q-meta-row">
+            <span id="s1-sim-badge" class="sim-badge">模拟案例 · 小组作业推进</span>
+            <span id="s1-context-note" class="ep-tag">EP01 · 第一次单张读牌</span>
+          </div>
+          <div>
+            <div id="s1-q-text" class="question-headline" data-var-text="question-text">今天我可以做哪一步，让小组作业往前走？</div>
+            <div id="s1-q-bar" class="q-underline"></div>
+          </div>
+        </div>
+
+        <div id="s1-sheet" class="worksheet">
+        <div class="binder-rail" data-layout-ignore>
+          <div class="binder-hole"></div>
+          <div class="binder-hole"></div>
+          <div class="binder-hole"></div>
+          <div class="binder-hole"></div>
+          <div class="binder-hole"></div>
+        </div>
+          <div id="s1-row-see" class="ws-row ws-row-active">
+            <div class="ws-label-col">
+              <span class="ws-step-num">1</span>
+              <span class="ws-step-name">看见</span>
+            </div>
+            <div class="ws-content-col">
+              <span id="s1-see-guide" class="ws-text-main">先从牌面上客观看到的细节开始</span>
+              <span id="s1-see-pill" class="status-pill pill-active">当前填写</span>
+            </div>
+          </div>
+
+          <div id="s1-row-maybe" class="ws-row">
+            <div class="ws-label-col">
+              <span class="ws-step-num">2</span>
+              <span class="ws-step-name">可能</span>
+            </div>
+            <div class="ws-content-col">
+              <span class="ws-text-placeholder">顺着画面细节联想两种可能的处境</span>
+              <span class="status-pill pill-wait">待填</span>
+            </div>
+          </div>
+
+          <div id="s1-row-check" class="ws-row">
+            <div class="ws-label-col">
+              <span class="ws-step-num">3</span>
+              <span class="ws-step-name">核对</span>
+            </div>
+            <div class="ws-content-col">
+              <span class="ws-text-placeholder">找一条现实里能查证的信息</span>
+              <span class="status-pill pill-wait">待填</span>
+            </div>
+          </div>
+
+          <div id="s1-row-act" class="ws-row">
+            <div class="ws-label-col">
+              <span class="ws-step-num">4</span>
+              <span class="ws-step-name">行动</span>
+            </div>
+            <div class="ws-content-col">
+              <span class="ws-text-placeholder">定一个今天就能开始的小动作</span>
+              <span class="status-pill pill-wait">待填</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="s1-tray" class="desk-tray">
+          <div class="tray-top-line">
+            <span id="s1-tray-msg" class="tray-title">本集跟做：一张正位宝剑二 · 看见 → 可能 → 核对 → 行动</span>
+            <span id="s1-tray-step" class="tray-sub">先观察牌面</span>
+          </div>
+          <div class="progress-track">
+            <div id="s1-prep-bar" class="progress-fill"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    gsap.set("#s1-plaque-ring", { opacity: 0, scale: 0.98 });
+    gsap.set("#s1-q-bar", { scaleX: 0 });
+    gsap.set("#s1-prep-bar", { scaleX: 0 });
+
+    tl.fromTo("#s1-card-frame", { scale: 0.988 }, { scale: 1, duration: 0.45, ease: "power3.out" }, 0);
+    tl.fromTo("#s1-plaque-ring", { opacity: 0, scale: 0.98 }, { opacity: 1, scale: 1, duration: 0.28, ease: "power3.out" }, 4.55);
+    tl.to("#s1-plaque-ring", { opacity: 0, duration: 0.35, ease: "power2.in" }, 7.6);
+
+    tl.to("#s1-sim-badge", { scale: 1.04, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" }, 11.15);
+    tl.fromTo("#s1-q-bar", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 15.1);
+
+    tl.to("#s1-see-pill", { scale: 1.06, duration: 0.18, yoyo: true, repeat: 1, ease: "power2.out" }, 24.25);
+    tl.fromTo("#s1-prep-bar", { scaleX: 0 }, { scaleX: 1, duration: 9.2, ease: "none" }, 18.5);
+    window.__timelines["s1-intro"] = tl;
+  </script>
+</template>

@@ -1,0 +1,540 @@
+<template>
+  <style>
+    @font-face {
+      font-family: "Noto Sans SC";
+      src: url("assets/fonts/NotoSansSC-VF.ttf") format("truetype");
+      font-weight: 100 900;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: "Noto Serif SC";
+      src: url("assets/fonts/NotoSerifSC-VF.ttf") format("truetype");
+      font-weight: 200 900;
+      font-style: normal;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      font-family: var(--font-body, "Noto Sans SC"), sans-serif;
+      color: var(--color-ink, #1f1916);
+      overflow: hidden;
+    }
+    .desk-bg {
+      position: absolute;
+      inset: 0;
+      background-color: var(--color-ground, #2b1e17);
+      background-image:
+        radial-gradient(ellipse 1100px 760px at 56% 42%, rgba(92, 62, 44, 0.44) 0%, rgba(43, 30, 23, 0) 72%),
+        repeating-linear-gradient(
+          90deg,
+          rgba(255, 244, 228, 0.016) 0px,
+          rgba(255, 244, 228, 0.016) 2px,
+          rgba(20, 12, 8, 0.024) 2px,
+          rgba(20, 12, 8, 0.024) 7px
+        );
+    }
+    .stage-layer {
+      position: absolute;
+      inset: 0;
+    }
+    .card-pedestal {
+      position: absolute;
+      left: 104px;
+      top: 56px;
+      width: 432px;
+      height: 828px;
+    }
+    .tarot-frame {
+      position: relative;
+      width: 432px;
+      height: 740px;
+      padding: 8px;
+      background: #f5efe2;
+      border-radius: 14px;
+      border: 2px solid #d7cab4;
+      box-shadow: 0 18px 36px rgba(10, 6, 4, 0.54), 0 3px 8px rgba(10, 6, 4, 0.32);
+    }
+    .tarot-art-box {
+      position: relative;
+      width: 412px;
+      height: 720px;
+      border-radius: 8px;
+      overflow: visible;
+    }
+    .tarot-art-box img {
+      width: 412px;
+      height: 720px;
+      object-fit: cover;
+      display: block;
+      border-radius: 8px;
+    }
+    .card-overlay-svg {
+      position: absolute;
+      inset: 0;
+      width: 412px;
+      height: 720px;
+      overflow: visible;
+      pointer-events: none;
+    }
+    .card-plaque {
+      margin-top: 14px;
+      width: 432px;
+      height: 72px;
+      padding: 0 22px;
+      border-radius: 12px;
+      background: #231711;
+      border: 2px solid #8a6a43;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #f8f2e7;
+      box-shadow: 0 8px 18px rgba(10, 6, 4, 0.35);
+    }
+    .card-plaque-name {
+      font-family: var(--font-display, "Noto Serif SC"), serif;
+      font-size: 31px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #fbf5ea;
+    }
+    .card-plaque-tag {
+      font-size: 28px;
+      font-weight: 700;
+      color: #f3c878;
+    }
+    .work-area {
+      position: absolute;
+      left: 576px;
+      top: 56px;
+      width: 1240px;
+      height: 828px;
+    }
+    .question-card {
+      position: relative;
+      width: 1240px;
+      height: 128px;
+      padding: 14px 28px;
+      border-radius: 14px;
+      background: var(--color-paper, #f6f1e7);
+      border: 2px solid #d5c7b2;
+      box-shadow: 0 12px 26px rgba(12, 7, 4, 0.34);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .q-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .sim-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 14px;
+      border-radius: 8px;
+      background: #f2dfd9;
+      border: 1.5px solid #c97f6d;
+      color: #8f2311;
+      font-size: 29px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    .ep-tag {
+      font-size: 28px;
+      font-weight: 600;
+      color: #4a3e37;
+    }
+    .question-headline {
+      font-family: var(--font-display, "Noto Serif SC"), serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: #1f1916;
+      line-height: 1.28;
+      letter-spacing: -0.01em;
+    }
+    .worksheet {
+      position: absolute;
+      left: 0;
+      top: 142px;
+      width: 1240px;
+      height: 534px;
+      padding: 14px 24px 14px 58px;
+      border-radius: 14px;
+      background: var(--color-paper, #f6f1e7);
+      border: 2px solid #d5c7b2;
+      box-shadow: 0 14px 30px rgba(12, 7, 4, 0.38);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .binder-rail {
+      position: absolute;
+      left: 16px;
+      top: 26px;
+      bottom: 26px;
+      width: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .binder-hole {
+      width: 18px;
+      height: 18px;
+      border-radius: 9px;
+      background: #2b1e17;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.65);
+    }
+    .ws-row {
+      position: relative;
+      width: 100%;
+      height: 118px;
+      border-radius: 10px;
+      background: #efe7d8;
+      border: 2px solid #d6c8b2;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+    }
+    .ws-row-active {
+      background: #fffaf0;
+      border: 3px solid var(--color-accent, #a62b17);
+      box-shadow: 0 6px 16px rgba(166, 43, 23, 0.14);
+    }
+    .ws-row-done {
+      background: #f8f4ec;
+      border: 2px solid #bfb09a;
+    }
+    .ws-label-col {
+      width: 148px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-right: 2px solid #d5c7b2;
+      padding-right: 14px;
+      margin-right: 20px;
+    }
+    .ws-step-num {
+      font-size: 28px;
+      font-weight: 700;
+      color: #8f2311;
+    }
+    .ws-step-name {
+      font-family: var(--font-display, "Noto Serif SC"), serif;
+      font-size: 33px;
+      font-weight: 700;
+      color: #1f1916;
+    }
+    .ws-content-col {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-width: 0;
+    }
+    .ws-text-main {
+      font-size: 30px;
+      font-weight: 600;
+      color: #1f1916;
+      line-height: 1.34;
+    }
+    .ws-text-placeholder {
+      font-size: 29px;
+      font-weight: 500;
+      color: #54463e;
+    }
+    .status-pill {
+      flex-shrink: 0;
+      padding: 5px 14px;
+      border-radius: 8px;
+      font-size: 29px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .pill-active {
+      background: #a62b17;
+      color: #fff9f5;
+    }
+    .pill-wait {
+      background: #dfd5c5;
+      color: #4a3e37;
+    }
+    .pill-fit {
+      background: #18523f;
+      color: #f4fbf8;
+    }
+    .pill-hold {
+      background: #dce0e3;
+      color: #2f373d;
+    }
+    .desk-tray {
+      position: absolute;
+      left: 0;
+      top: 690px;
+      width: 1240px;
+      height: 138px;
+      border-radius: 14px;
+      background: #221711;
+      border: 2px solid #6e5338;
+      padding: 16px 26px;
+      color: #f8f2e7;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: 0 10px 24px rgba(10, 6, 4, 0.42);
+    }
+    .tray-top-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .tray-title {
+      font-size: 30px;
+      font-weight: 700;
+      color: #fbf4e8;
+      line-height: 1.3;
+    }
+    .tray-sub {
+      font-size: 28px;
+      font-weight: 600;
+      color: #f3c878;
+      line-height: 1.3;
+    }
+    .progress-track {
+      margin-top: 14px;
+      width: 100%;
+      height: 12px;
+      border-radius: 6px;
+      background: rgba(248, 242, 231, 0.16);
+      overflow: hidden;
+    }
+    .progress-fill {
+      width: 100%;
+      height: 100%;
+      border-radius: 6px;
+      background: #e5a94c;
+      transform-origin: left center;
+    }
+    .cand-judge-row {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .judge-card {
+      flex: 1;
+      height: 92px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      background: #f4ece0;
+      border: 2px solid #c9b79c;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .judge-name {
+      font-size: 29px;
+      font-weight: 700;
+      color: #1f1916;
+    }
+    .chat-box {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .chat-header-pill {
+      padding: 6px 14px;
+      border-radius: 8px;
+      background: #2b1e17;
+      color: #fbf4e8;
+      font-size: 28px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .chat-lines {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .chat-msg {
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: #fffdf9;
+      border: 2px solid #cbbba2;
+      font-size: 29px;
+      font-weight: 700;
+      color: #1f1916;
+    }
+    .chat-msg-key {
+      border-color: #18523f;
+      background: #edf6f1;
+    }
+  </style>
+  <div id="root" data-composition-id="s4-check" data-width="1920" data-height="1080">
+    <div id="s4-bg" class="desk-bg"></div>
+    <div id="s4-stage" class="clip stage-layer" data-start="0" data-duration="43.5" data-track-index="1" data-hold>
+      <div class="card-pedestal">
+        <div class="tarot-frame">
+          <div class="tarot-art-box">
+            <img src="assets/cards/swords02.png" alt="宝剑二正位" />
+            <svg class="card-overlay-svg" viewBox="0 0 1168 2000">
+              <rect
+                id="s4-fit-blindfold"
+                x="472"
+                y="704"
+                width="206"
+                height="82"
+                rx="41"
+                fill="rgba(24, 82, 63, 0.22)"
+                stroke="#18523f"
+                stroke-width="15"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="card-plaque">
+          <span class="card-plaque-name" data-var-text="card-label">宝剑二 · 正位</span>
+          <span class="card-plaque-tag">用事实筛选</span>
+        </div>
+      </div>
+
+      <div class="work-area">
+        <div class="question-card">
+          <div class="q-meta-row">
+            <span class="sim-badge">模拟案例 · 小组作业推进</span>
+            <span class="ep-tag">步骤 3 / 4 · 查一件事，再决定哪种更合适</span>
+          </div>
+          <div class="question-headline" data-var-text="question-text">今天我可以做哪一步，让小组作业往前走？</div>
+        </div>
+
+        <div class="worksheet">
+        <div class="binder-rail" data-layout-ignore>
+          <div class="binder-hole"></div>
+          <div class="binder-hole"></div>
+          <div class="binder-hole"></div>
+          <div class="binder-hole"></div>
+          <div class="binder-hole"></div>
+        </div>
+          <div class="ws-row ws-row-done" style="height: 102px;">
+            <div class="ws-label-col">
+              <span class="ws-step-num">1</span>
+              <span class="ws-step-name">看见</span>
+            </div>
+            <div class="ws-content-col">
+              <span class="ws-text-main">眼睛被白布蒙住 · 双臂交叉各握一把剑</span>
+              <span class="status-pill pill-wait">已记录</span>
+            </div>
+          </div>
+
+          <div class="ws-row ws-row-done" style="height: 126px;">
+            <div class="ws-label-col">
+              <span class="ws-step-num">2</span>
+              <span class="ws-step-name">可能</span>
+            </div>
+            <div class="ws-content-col">
+              <div class="cand-judge-row">
+                <div id="s4-box-a" class="judge-card">
+                  <span class="judge-name" data-var-text="cand-a">A 两件事顾不过来</span>
+                  <span id="s4-tag-a" class="status-pill pill-hold">暂缺依据</span>
+                </div>
+                <div id="s4-box-b" class="judge-card">
+                  <span class="judge-name" data-var-text="cand-b">B 在等一条消息</span>
+                  <span id="s4-tag-b" class="status-pill pill-fit">目前较贴合</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ws-row ws-row-active" style="height: 146px;">
+            <div class="ws-label-col">
+              <span class="ws-step-num">3</span>
+              <span class="ws-step-name">核对</span>
+            </div>
+            <div class="ws-content-col" style="position: relative; height: 100%;">
+              <div id="s4-ask-prompt" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                <span class="ws-text-main" style="color: #8f2311; font-size: 33px;">可以查哪条消息？（答案区先留空想一想）</span>
+                <span class="status-pill pill-active">先想一想</span>
+              </div>
+              <div id="s4-chat-reveal" class="chat-box" style="position: absolute; inset: 0;">
+                <span class="chat-header-pill">模拟群消息</span>
+                <div class="chat-lines">
+                  <span id="s4-msg-1" class="chat-msg" data-var-text="fact-1">1. 分工已确认</span>
+                  <span id="s4-msg-2" class="chat-msg chat-msg-key" data-var-text="fact-2">2. 提交格式待老师确认</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ws-row" style="height: 98px;">
+            <div class="ws-label-col">
+              <span class="ws-step-num">4</span>
+              <span class="ws-step-name">行动</span>
+            </div>
+            <div class="ws-content-col">
+              <span class="ws-text-placeholder">根据核对结果写下一步动作</span>
+              <span class="status-pill pill-wait">待填</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="desk-tray">
+          <div class="tray-top-line">
+            <span id="s4-tray-title" class="tray-title">如果这是你的小组，你会先去翻哪里核实卡点？</span>
+            <span id="s4-tray-right" class="tray-sub">思考 · 可暂停</span>
+          </div>
+          <div class="progress-track">
+            <div id="s4-wait-bar" class="progress-fill"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    gsap.set("#s4-chat-reveal", { opacity: 0 });
+    gsap.set("#s4-msg-1", { opacity: 0, y: 10 });
+    gsap.set("#s4-msg-2", { opacity: 0, y: 10 });
+    gsap.set("#s4-tag-a", { opacity: 0, scale: 0.88 });
+    gsap.set("#s4-tag-b", { opacity: 0, scale: 0.88 });
+    gsap.set("#s4-fit-blindfold", { opacity: 0 });
+    gsap.set("#s4-wait-bar", { scaleX: 0 });
+
+    // 5.0s crisp check-thinking countdown: local 7.60s -> 12.60s (abs 120.10s -> 125.10s)
+    tl.fromTo("#s4-wait-bar", { scaleX: 0 }, { scaleX: 1, duration: 5.0, ease: "none" }, 7.6);
+
+    // Reveal group chat container on v04_2 ("翻一下小组群" local 14.62s = abs 127.12s)
+    tl.to("#s4-ask-prompt", { opacity: 0, duration: 0.2, ease: "power2.in" }, 14.4);
+    tl.fromTo("#s4-chat-reveal", { opacity: 0 }, { opacity: 1, duration: 0.26, ease: "power2.out" }, 14.62);
+    tl.set("#s4-tray-title", { textContent: "翻看小组群记录（模拟案例）：分工已确认，提交格式待老师答复" }, 14.62);
+    tl.set("#s4-tray-right", { textContent: "核对现实记录" }, 14.62);
+
+    // Reveal Line 1 & Line 2 on v04_3 (starts local 18.90s = abs 131.40s)
+    tl.fromTo("#s4-msg-1", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.28, ease: "power3.out" }, 21.07);
+    tl.fromTo("#s4-msg-2", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.28, ease: "power3.out" }, 23.26);
+
+    // Stamp B ("目前较贴合") & A ("暂缺依据") on v04_4 (starts local 26.90s = abs 139.40s)
+    tl.fromTo("#s4-tag-b", { opacity: 0, scale: 0.88 }, { opacity: 1, scale: 1, duration: 0.28, ease: "back.out(1.4)" }, 31.27);
+    tl.to("#s4-box-b", { backgroundColor: "#e6f2ec", borderColor: "#18523f", duration: 0.28 }, 31.27);
+    tl.fromTo("#s4-fit-blindfold", { opacity: 0 }, { opacity: 1, duration: 0.32, ease: "power2.out" }, 31.27);
+
+    tl.fromTo("#s4-tag-a", { opacity: 0, scale: 0.88 }, { opacity: 1, scale: 1, duration: 0.28, ease: "power3.out" }, 37.70);
+    tl.to("#s4-box-a", { opacity: 0.84, duration: 0.28 }, 37.70);
+
+    tl.set("#s4-tray-title", { textContent: "先保留 A 但不当成既定事实；按已查到的群消息，采用更贴合的 B" }, 39.1);
+    tl.set("#s4-tray-right", { textContent: "有据取舍" }, 39.1);
+
+    window.__timelines["s4-check"] = tl;
+  </script>
+</template>

@@ -1,0 +1,113 @@
+<!doctype html>
+<html
+  lang="zh-CN"
+  data-composition-variables='[{"id": "color-ground", "type": "color", "label": "桌面底色", "default": "#2b1e17"}, {"id": "color-paper", "type": "color", "label": "活页纸底色", "default": "#f6f1e7"}, {"id": "color-ink", "type": "color", "label": "正文墨色", "default": "#1f1916"}, {"id": "color-accent", "type": "color", "label": "重点批注色", "default": "#a62b17"}, {"id": "font-display", "type": "string", "label": "标题字体", "default": "Noto Serif SC"}, {"id": "font-body", "type": "string", "label": "正文字体", "default": "Noto Sans SC"}, {"id": "card-label", "type": "string", "label": "牌名与朝向", "default": "宝剑二 · 正位"}, {"id": "question-text", "type": "string", "label": "本集练习问题", "default": "今天我可以做哪一步，让小组作业往前走？"}, {"id": "obs-1", "type": "string", "label": "看见细节1", "default": "① 一个人端坐着，眼睛被白布蒙住"}, {"id": "obs-2", "type": "string", "label": "看见细节2", "default": "② 双臂在胸前交叉，两手各握一把剑"}, {"id": "cand-a", "type": "string", "label": "可能联想A", "default": "A 两件事顾不过来"}, {"id": "cand-b", "type": "string", "label": "可能联想B", "default": "B 在等一条消息"}, {"id": "fact-1", "type": "string", "label": "模拟群消息1", "default": "1. 分工已确认"}, {"id": "fact-2", "type": "string", "label": "模拟群消息2", "default": "2. 提交格式待老师确认"}, {"id": "check-summary", "type": "string", "label": "核对结论", "default": "分工已定，格式待确认"}, {"id": "action-text", "type": "string", "label": "今日一步行动", "default": "晚饭前在小组群问清提交格式"}, {"id": "alt-question", "type": "string", "label": "自选练习题", "default": "今晚整理书桌，我从哪里开始？"}]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>EP01 第一次单张读牌 · 塔罗牌系统教程</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "Noto Sans SC";
+        src: url("assets/fonts/NotoSansSC-VF.ttf") format("truetype");
+        font-weight: 100 900;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Noto Serif SC";
+        src: url("assets/fonts/NotoSerifSC-VF.ttf") format("truetype");
+        font-weight: 200 900;
+        font-style: normal;
+      }
+      :root {
+        --color-ground: #2b1e17;
+        --color-paper: #f6f1e7;
+        --color-ink: #1f1916;
+        --color-accent: #a62b17;
+        --font-display: "Noto Serif SC";
+        --font-body: "Noto Sans SC";
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--color-ground); }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+      #main-bg { position: absolute; inset: 0; background: var(--color-ground); }
+      .clip { position: absolute; inset: 0; }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="246.5"
+      data-fps="30"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div id="main-bg"></div>
+
+      <div id="s1-intro" class="clip" data-composition-id="s1-intro" data-composition-src="compositions/s1-intro.html" data-start="0" data-duration="28" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index: 2;"></div>
+      <div id="s2-see" class="clip" data-composition-id="s2-see" data-composition-src="compositions/s2-see.html" data-start="28" data-duration="44.5" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index: 2;"></div>
+      <div id="s3-maybe" class="clip" data-composition-id="s3-maybe" data-composition-src="compositions/s3-maybe.html" data-start="72.5" data-duration="40" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index: 2;"></div>
+      <div id="s4-check" class="clip" data-composition-id="s4-check" data-composition-src="compositions/s4-check.html" data-start="112.5" data-duration="43.5" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index: 2;"></div>
+      <div id="s5-act" class="clip" data-composition-id="s5-act" data-composition-src="compositions/s5-act.html" data-start="156" data-duration="34.5" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index: 2;"></div>
+      <div id="s6-practice" class="clip" data-composition-id="s6-practice" data-composition-src="compositions/s6-practice.html" data-start="190.5" data-duration="56" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index: 2;"></div>
+
+      <div id="ep01-captions" class="clip" data-composition-id="ep01-captions" data-composition-src="compositions/captions.html" data-start="0" data-duration="246.5" data-track-index="2" data-track-kind="captions" data-width="1920" data-height="1080" style="z-index: 15; pointer-events: none;"></div>
+
+      <audio id="voice-v01_1" class="clip" src="assets/voice/v01_1.wav" data-start="0.50" data-duration="7.288" data-track-index="3" data-volume="1"></audio>
+      <audio id="voice-v01_2" class="clip" src="assets/voice/v01_2.wav" data-start="8.15" data-duration="9.861" data-track-index="3" data-volume="1"></audio>
+      <audio id="voice-v01_3" class="clip" src="assets/voice/v01_3.wav" data-start="18.40" data-duration="8.587" data-track-index="3" data-volume="1"></audio>
+      <audio id="voice-v02_1" class="clip" src="assets/voice/v02_1.wav" data-start="28.40" data-duration="8.829" data-track-index="3" data-volume="1"></audio>
+      <audio id="voice-v02_2" class="clip" src="assets/voice/v02_2.wav" data-start="42.80" data-duration="6.232" data-track-index="3" data-volume="1"></audio>
+      <audio id="voice-v02_3" class="clip" src="assets/voice/v02_3.wav" data-start="49.35" data-duration="9.023" data-track-index="3" data-volume="1"></audio>
+      <audio id="voice-v02_4" class="clip" src="assets/voice/v02_4.wav" data-start="58.80" data-duration="13.296" data-track-index="3" data-volume="1"></audio>
+      <audio id="voice-v03_1" class="clip" src="assets/voice/v03_1.wav" data-start="72.90" data-duration="13.283" data-track-index="3" data-volume="1"></audio>
+      <audio id="voice-v03_2" class="clip" src="assets/voice/v03_2.wav" data-start="86.60" data-duration="8.332" data-track-index="3" data-volume="1"></audio>
+      <audio id="voice-v03_3" class="clip" src="assets/voice/v03_3.wav" data-start="95.35" data-duration="12.009" data-track-index="3" data-volume="1"></audio>
+      <audio id="voice-v04_1" class="clip" src="assets/voice/v04_1.wav" data-start="112.90" data-duration="6.924" data-track-index="3" data-volume="1"></audio>
+      <audio id="voice-v04_2" class="clip" src="assets/voice/v04_2.wav" data-start="125.40" data-duration="5.639" data-track-index="3" data-volume="1"></audio>
+      <audio id="voice-v04_3" class="clip" src="assets/voice/v04_3.wav" data-start="131.40" data-duration="7.640" data-track-index="3" data-volume="1"></audio>
+      <audio id="voice-v04_4" class="clip" src="assets/voice/v04_4.wav" data-start="139.40" data-duration="16.159" data-track-index="3" data-volume="1"></audio>
+      <audio id="voice-v05_1" class="clip" src="assets/voice/v05_1.wav" data-start="156.40" data-duration="11.839" data-track-index="3" data-volume="1"></audio>
+      <audio id="voice-v05_2" class="clip" src="assets/voice/v05_2.wav" data-start="168.65" data-duration="11.924" data-track-index="3" data-volume="1"></audio>
+      <audio id="voice-v05_3" class="clip" src="assets/voice/v05_3.wav" data-start="181.00" data-duration="8.805" data-track-index="3" data-volume="1"></audio>
+      <audio id="voice-v06_0" class="clip" src="assets/voice/v06_0.wav" data-start="190.90" data-duration="14.120" data-track-index="3" data-volume="1"></audio>
+      <audio id="voice-v06_1" class="clip" src="assets/voice/v06_1.wav" data-start="213.70" data-duration="17.288" data-track-index="3" data-volume="1"></audio>
+      <audio id="voice-v06_2" class="clip" src="assets/voice/v06_2.wav" data-start="231.40" data-duration="12.336" data-track-index="3" data-volume="1"></audio>
+      <audio id="sfx-01" class="clip" src="assets/sfx/click-soft.mp3" data-start="4.58" data-duration="0.35" data-track-index="4" data-volume="0.32"></audio>
+      <audio id="sfx-02" class="clip" src="assets/sfx/pop.mp3" data-start="11.17" data-duration="0.65" data-track-index="4" data-volume="0.28"></audio>
+      <audio id="sfx-03" class="clip" src="assets/sfx/click-soft.mp3" data-start="24.27" data-duration="0.35" data-track-index="4" data-volume="0.32"></audio>
+      <audio id="sfx-04" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="47.55" data-duration="0.52" data-track-index="4" data-volume="0.3"></audio>
+      <audio id="sfx-05" class="clip" src="assets/sfx/click-soft.mp3" data-start="50.50" data-duration="0.35" data-track-index="4" data-volume="0.32"></audio>
+      <audio id="sfx-06" class="clip" src="assets/sfx/pop.mp3" data-start="57.18" data-duration="0.65" data-track-index="4" data-volume="0.28"></audio>
+      <audio id="sfx-07" class="clip" src="assets/sfx/click.mp3" data-start="63.00" data-duration="0.35" data-track-index="4" data-volume="0.3"></audio>
+      <audio id="sfx-08" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="78.31" data-duration="0.52" data-track-index="4" data-volume="0.28"></audio>
+      <audio id="sfx-09" class="clip" src="assets/sfx/pop.mp3" data-start="81.98" data-duration="0.65" data-track-index="4" data-volume="0.3"></audio>
+      <audio id="sfx-10" class="clip" src="assets/sfx/click-soft.mp3" data-start="86.70" data-duration="0.35" data-track-index="4" data-volume="0.3"></audio>
+      <audio id="sfx-11" class="clip" src="assets/sfx/pop.mp3" data-start="90.47" data-duration="0.65" data-track-index="4" data-volume="0.3"></audio>
+      <audio id="sfx-12" class="clip" src="assets/sfx/pop.mp3" data-start="116.80" data-duration="0.65" data-track-index="4" data-volume="0.28"></audio>
+      <audio id="sfx-13" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="127.12" data-duration="0.52" data-track-index="4" data-volume="0.3"></audio>
+      <audio id="sfx-14" class="clip" src="assets/sfx/click-soft.mp3" data-start="133.57" data-duration="0.35" data-track-index="4" data-volume="0.32"></audio>
+      <audio id="sfx-15" class="clip" src="assets/sfx/click.mp3" data-start="135.76" data-duration="0.35" data-track-index="4" data-volume="0.32"></audio>
+      <audio id="sfx-16" class="clip" src="assets/sfx/pop.mp3" data-start="143.77" data-duration="0.65" data-track-index="4" data-volume="0.32"></audio>
+      <audio id="sfx-17" class="clip" src="assets/sfx/click-soft.mp3" data-start="150.20" data-duration="0.35" data-track-index="4" data-volume="0.3"></audio>
+      <audio id="sfx-18" class="clip" src="assets/sfx/click-soft.mp3" data-start="156.90" data-duration="0.35" data-track-index="4" data-volume="0.3"></audio>
+      <audio id="sfx-19" class="clip" src="assets/sfx/pop.mp3" data-start="162.03" data-duration="0.65" data-track-index="4" data-volume="0.3"></audio>
+      <audio id="sfx-20" class="clip" src="assets/sfx/typing.mp3" data-start="164.80" data-duration="1.40" data-track-index="4" data-volume="0.26"></audio>
+      <audio id="sfx-21" class="clip" src="assets/sfx/click.mp3" data-start="170.50" data-duration="0.35" data-track-index="4" data-volume="0.28"></audio>
+      <audio id="sfx-22" class="clip" src="assets/sfx/whoosh.mp3" data-start="191.20" data-duration="0.52" data-track-index="4" data-volume="0.3"></audio>
+      <audio id="sfx-23" class="clip" src="assets/sfx/pop.mp3" data-start="214.10" data-duration="0.65" data-track-index="4" data-volume="0.32"></audio>
+      <audio id="sfx-24" class="clip" src="assets/sfx/click-soft.mp3" data-start="223.85" data-duration="0.35" data-track-index="4" data-volume="0.28"></audio>
+      <audio id="sfx-25" class="clip" src="assets/sfx/click-soft.mp3" data-start="227.12" data-duration="0.35" data-track-index="4" data-volume="0.28"></audio>
+      <audio id="sfx-26" class="clip" src="assets/sfx/click.mp3" data-start="230.60" data-duration="0.35" data-track-index="4" data-volume="0.28"></audio>
+      <audio id="sfx-27" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="237.22" data-duration="0.52" data-track-index="4" data-volume="0.28"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>
